@@ -1,0 +1,7 @@
+@font-face {font-family: "Source Sans Pro"; src: url('../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal;}
+@font-face {font-family: "Source Sans Pro"; src: url('../fonts/Source_Sans_Pro/SourceSansPro-Light.ttf') format('truetype'); font-weight: lighter;font-style: normal;}
+
+body{ background-color: rgb(247, 247, 244); color:rgb(30, 30, 30); font-family: 'Source Sans Pro'; font-weight: lighter; max-width: 500px;}
+input{font: inherit; width: 100%; padding: 10px;}
+
+.red {background-color: #fcc1c1}

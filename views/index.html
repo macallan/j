@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/stylesheet.css">
+  </head>
+  <body>
+    <script type="module">
+      'use strict'
+      import Journal from './js/journal.js'
+      const journal = new Journal()
+
+      journal.install(document.body)
+      journal.start()
+    </script>
+  </body>
+</html>
