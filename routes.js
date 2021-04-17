@@ -28,8 +28,8 @@ router.get('/api/macallan', async (req, res, next) => {
 })
 
 router.get('/api/users/:user/pages/:page', async (req, res, next) => {
-  const userRef = db.collection('users').doc('macallan')
-  const pageRef = userRef.collection('pages').where('title', '==', '2021-04-03')
+  const userRef = db.collection('users').doc(req.params.user)
+  const pageRef = userRef.collection('pages').where('title', '==', req.params.page)
   const pages = await pageRef.get()
   if (pages.docs.length == 0) {
     console.log('No such document')
@@ -37,9 +37,20 @@ router.get('/api/users/:user/pages/:page', async (req, res, next) => {
   }
 
   pageData = pages.docs[0].data()
-
   return res.send(pageData);
 })
 
+router.put('/api/users/:user/pages/:page/update', async (req, res, next) => {
+  const userRef = db.collection('users').doc(req.params.user)
+  const pages = await userRef.collection('pages').where('title', '==', req.params.page).get()
+  if (pages.docs.length == 1) {
+    const response = await userRef.collection('pages').doc(pages.docs[0].id).update({ bullets: req.body.bullets })
+    res.send(response)
+  } else {
+    console.log('Could not find only 1 page')
+    res.statusCode(400)
+    res.send('Could not find only 1 page to update')
+  }
+})
 
 module.exports = router

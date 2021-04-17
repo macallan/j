@@ -2,6 +2,8 @@ import { Settings } from "../consts/settings.js"
 
 export default function Bullet(bulletHandler) {
   this.index = null
+  this.text = ''
+  this.tagText = ''
   this.bulletHandler = bulletHandler
 
   this.el = document.createElement('li')
@@ -28,18 +30,27 @@ export default function Bullet(bulletHandler) {
   }
 
   this.setTag = function(tag) {
+    this.tagText = tag.key
     this.tag = tag
     this.el.prepend(this.tag.getElement(false))
     return this
   }
 
   this.setText = function(text) {
+    this.text = text
     this.textEl.innerText = text
     return this
   }
 
   this.toHTML = function() {
     return this.el
+  }
+
+  this.toJSON = function() {
+    return {
+      text: this.text,
+      tag: this.tagText
+    }
   }
 
   this.closeButtonClicked = function () {
