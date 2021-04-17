@@ -7,8 +7,10 @@ export default function Container() {
   this.el.style.paddingInlineStart = '0px'
 
   this.install = function (host, currentPage) {
-    const bullets = this.getBulletsForPage(currentPage)
+    // const bullets = this.getBulletsForPage(currentPage)
+    const bullets = []
     this.setup(bullets)
+    this.getFirestoreBulletsForPage(currentPage)
     host.appendChild(this.el)
   }
 
@@ -46,6 +48,19 @@ export default function Container() {
       const tag = Tags.getTag(data.tag)
       return new Bullet(this.bulletHandler.bind(this)).setTag(tag).setText(data.text).install()
     })
+  }
+
+  this.getFirestoreBulletsForPage = function(page) {
+    fetch(`api/users/macallan/pages/${page}`)
+      .then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        const bullets = json.bullets.map((data) => {
+          const tag = Tags.getTag(data.tag)
+          return new Bullet(this.bulletHandler.bind(this)).setTag(tag).setText(data.text).install()
+        })
+        this.setup(bullets)
+      }.bind(this))
   }
 
   this.bulletHandler = function(index) {
