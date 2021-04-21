@@ -4,6 +4,7 @@ const express = require('express')
 const route = require('./routes')
 
 const app = express()
+const port = process.env['PORT'] || 3000
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
@@ -13,4 +14,5 @@ app.use((req, res, next) => {
 })
 
 const server = http.createServer(app)
-server.listen(3000)
+console.log('port', port)
+server.listen(port)
