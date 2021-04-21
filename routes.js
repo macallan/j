@@ -4,10 +4,14 @@ const router = express.Router()
 
 const admin = require('firebase-admin')
 
-const serviceAccount = require('./secrets/journal-309718-firebase-adminsdk-3ls6r-5f5844407a.json')
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-})
+if (process.env['LOCAL_SERVICE_ACCOUNT']) {
+  const serviceAccount = require(process.env['LOCAL_SERVICE_ACCOUNT'])
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  })
+} else {
+  admin.initializeApp()
+}
 
 const db = admin.firestore()
 
