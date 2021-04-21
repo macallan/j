@@ -20,9 +20,14 @@ export default function Page() {
     this.page.innerText = this.getCurrentPage()
     this.el.appendChild(this.page)
     this.input.install(this.el)
-    this.container.install(this.el, this.getCurrentPage())
+    this.container.install(this.el, this.getCurrentPage(), this.setPage.bind(this))
     host.appendChild(this.el)
     this.input.focus()
+  }
+
+  this.setPage = function(page) {
+    this.page.innerText = page
+    this.container.install(this.el, page, this.setPage.bind(this))
   }
 
   this.getCurrentPage = function() {

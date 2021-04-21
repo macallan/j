@@ -33,11 +33,21 @@ router.get('/api/users/:user/pages/:page', async (req, res, next) => {
   const pages = await pageRef.get()
   if (pages.docs.length == 0) {
     console.log('No such document')
-    return res.send('Could not find page')
+    const newPageRef = userRef.collection('pages').doc(req.params.page)
+    const response = await newPageRef.set({
+      title: req.params.page,
+      bullets: []
+    })
+    console.log(response)
+    return res.send(response.data())
   }
 
   pageData = pages.docs[0].data()
   return res.send(pageData);
+})
+
+router.post('/api/users/:user/pages/:page/new', async (req, res, next) => {
+
 })
 
 router.put('/api/users/:user/pages/:page/update', async (req, res, next) => {

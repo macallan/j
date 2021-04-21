@@ -8,7 +8,7 @@ export const Settings = {
     blue: '#7ed6df',
     gold: '#f9ca24',
     orange: '#ffbe76',
-    purple: '#30336b',
+    purple: '#686de0',
     brightPurple: '#e056fd',
     green: '#badc58'
   }

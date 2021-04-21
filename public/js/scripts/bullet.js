@@ -32,7 +32,9 @@ export default function Bullet(bulletHandler) {
   this.setTag = function(tag) {
     this.tagText = tag.key
     this.tag = tag
-    this.el.prepend(this.tag.getElement(false))
+    const tagEl = this.tag.getElement(false)
+    this.el.prepend(tagEl)
+    tagEl.addEventListener('click', this.tagButtonClicked.bind(this))
     return this
   }
 
@@ -54,6 +56,12 @@ export default function Bullet(bulletHandler) {
   }
 
   this.closeButtonClicked = function () {
-    this.bulletHandler(this.index)
+    // TODO make an action constant
+    this.bulletHandler('REMOVE', this.index)
+  }
+
+  this.tagButtonClicked = function () {
+    this.bulletHandler(this.tag.name.toUpperCase() + '_CLICKED', this.text)
+    console.log(`Tag ${this.tag.name} clicked!`)
   }
 }

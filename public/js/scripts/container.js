@@ -10,11 +10,12 @@ export default function Container() {
 
   this.currentPage = ''
 
-  this.install = function (host, currentPage) {
+  this.install = function (host, currentPage, setPageHandler) {
     // const bullets = this.getBulletsForPage(currentPage)
     const bullets = []
     // this.setup(bullets)
     this.currentPage = currentPage
+    this.setPageHandler = setPageHandler
     this.getFirestoreBulletsForPage(currentPage)
     host.appendChild(this.el)
   }
@@ -71,6 +72,7 @@ export default function Container() {
       .then(function (response) {
         return response.json();
       }).then(function (json) {
+        this.currentPage = page
         const bullets = json.bullets.map((data) => {
           const tag = Tags.getTag(data.tag)
           return new Bullet(this.bulletHandler.bind(this)).setTag(tag).setText(data.text).install()
@@ -90,9 +92,15 @@ export default function Container() {
     }).then(response => response.json())
   }
 
-  this.bulletHandler = function(index) {
+  this.bulletHandler = function(action, index) {
     // For now this only removes the bullet but this function could be modified to do actions
-    this.removeBullet(index)
+    if (action == 'REMOVE') {
+      this.removeBullet(index)
+    } else if (action == 'LINK_CLICKED') {
+      this.setPageHandler(index)
+    } else {
+      console.log(`No action registered for: ${action}`)
+    }
   }
 
 }

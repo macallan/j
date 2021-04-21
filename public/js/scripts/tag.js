@@ -29,6 +29,7 @@ export const Tags =  {
     't': new Tag('Todo', 't').setColor(Settings.colors.blue),
     'i': new Tag('Idea', 'i').setColor(Settings.colors.green),
     'e': new Tag('Event', 'e').setColor(Settings.colors.orange),
+    'l': new Tag('Link', 'l').setColor(Settings.colors.purple),
     '-': new Tag('', '-').setColor(Settings.colors.brightPurple),
   },
   getTag: function (tag) {
