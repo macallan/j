@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "FIRESTORE_EMULATOR_HOST=localhost:8080 node app.js"
+    "start": "FIRESTORE_EMULATOR_HOST=localhost:8080 node app.js",
+    "prod-start": "npm install && node app.js"
   },
   "author": "macallan",
   "license": "ISC",
