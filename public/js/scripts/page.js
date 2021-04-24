@@ -31,7 +31,7 @@ export default function Page() {
   }
 
   this.getCurrentPage = function() {
-    return Settings.currentPage
+    return new Date().toISOString().slice(0,10)
   }
 
 }

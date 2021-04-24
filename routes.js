@@ -42,7 +42,7 @@ router.get('/api/users/:user/pages/:page', async (req, res, next) => {
       title: req.params.page,
       bullets: []
     })
-    console.log(response)
+    pages = await newPageRef.get()
     return res.send(response.data())
   }
 
